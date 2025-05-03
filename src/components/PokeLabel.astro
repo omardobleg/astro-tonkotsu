@@ -1,0 +1,15 @@
+---
+import type { Pokemon } from "../loader/schema";
+
+interface Props {
+  pokemon: Pokemon;
+}
+const { pokemon } = Astro.props;
+const { Name } = pokemon;
+---
+
+<a href={`pokemon/${Name}`}>
+  <section>
+    <h1>{Name}</h1>
+  </section>
+</a>

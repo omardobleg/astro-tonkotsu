@@ -1,11 +1,19 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
+import Layout from "../layouts/Layout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Solar from "../components/Solar.astro";
+import Spinner from "../components/Spinner.astro";
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+export const prerender = false;
 ---
 
 <Layout>
-	<Welcome />
+  <BaseLayout>
+    <Solar server:defer>
+      <div slot="fallback" class="flex justify-center">
+        <Spinner height={300} />
+      </div>
+    </Solar>
+  </BaseLayout>
 </Layout>

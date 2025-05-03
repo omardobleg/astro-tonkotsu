@@ -1,0 +1,8 @@
+---
+import "../styles/glance.css";
+const panel = await fetch("https://mullengg-widgetsolar.web.val.run/").then(
+  (data) => data.text()
+);
+---
+
+<section set:html={panel} class="bg-gray-400 w-2xs mx-auto p-2 rounded-sm" />

@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import PokeLabel from "../../components/PokeLabel.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Layout from "../../layouts/Layout.astro";
+
+const pokemons = await getCollection("pokemon");
+---
+
+<Layout>
+  <BaseLayout>
+    <section class="flex gap-2 flex-wrap">
+      {
+        pokemons.map((poke) => (
+          <div class="w-32 border-2 border-amber-100 rounded-xs bg-gray-800 text-white ">
+            <PokeLabel pokemon={poke.data} />
+          </div>
+        ))
+      }
+    </section>
+  </BaseLayout>
+</Layout>

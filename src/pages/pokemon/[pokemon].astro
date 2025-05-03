@@ -1,0 +1,29 @@
+---
+// import type { GetStaticPaths } from "astro";
+// export const getStaticPaths: GetStaticPaths = async (options) => {
+//   const pokemons = await getCollection("pokemon");
+//   return pokemons.map((pokemon) => ({
+//     params: { pokemon: pokemon.data.Name },
+//     props: pokemon.data,
+//   }));
+// };
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PokeCard from "../../components/PokeCard.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getEntry } from "astro:content";
+import { logger } from "@it-astro:logger";
+export const prerender = false;
+Astro.locals.cache(60);
+const { pokemon } = Astro.params;
+const pokemonData = await getEntry("pokemon", pokemon || "");
+logger.info(`Loading pokemon ${pokemon}`);
+---
+
+<Layout>
+  <BaseLayout>
+    <section class="flex gap-2 flex-wrap">
+      {pokemonData && <PokeCard pokemon={pokemonData.data} />}
+    </section>
+  </BaseLayout>
+</Layout>
