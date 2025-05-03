@@ -1,6 +1,7 @@
 FROM node:lts AS base
 WORKDIR /app
-ENV TEABLE_TOKEN=$NODE_ENV
+ENV TEABLE_TOKEN=$TEABLE_TOKEN
+ENV TEABLE_URL=$TEABLE_URL
 COPY package.json package-lock.json ./
 
 FROM base AS prod-deps
