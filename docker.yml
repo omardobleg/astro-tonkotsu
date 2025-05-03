@@ -1,7 +1,6 @@
 FROM node:lts AS base
 WORKDIR /app
-ENV TEABLE_TOKEN=$TEABLE_TOKEN
-ENV TEABLE_URL=$TEABLE_URL
+
 COPY package.json package-lock.json ./
 
 FROM base AS prod-deps
@@ -11,6 +10,8 @@ FROM base AS build-deps
 RUN npm install
 
 FROM build-deps AS build
+ENV TEABLE_TOKEN=$TEABLE_TOKEN
+ENV TEABLE_URL=$TEABLE_URL
 COPY . .
 RUN npm run build
 
