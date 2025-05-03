@@ -20,6 +20,11 @@ export default defineConfig({
         access: "secret",
         default: "",
       }),
+      TEABLE_URL: envField.string({
+        context: "server",
+        access: "secret",
+        default: "",
+      }),
     },
   },
 });

@@ -1,12 +1,12 @@
 // 1. Importa las utilidades de `astro:content`
 import { z, defineCollection } from "astro:content";
-import { TEABLE_TOKEN } from "astro:env/server";
+import { TEABLE_TOKEN, TEABLE_URL } from "astro:env/server";
 import { teableLoader } from "./loader/teable-loader.ts";
 import { PokemonSchema } from "./loader/schema.ts";
 // 2. Define tu colección(es)
 const pokemonCollection = defineCollection({
   loader: teableLoader({
-    url: "http://teable.pi.local",
+    url: TEABLE_URL,
     token: TEABLE_TOKEN,
     jsonSchema: PokemonSchema,
     table: "tbl6DiJYHNEummvrHwa",
