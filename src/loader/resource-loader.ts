@@ -1,3 +1,4 @@
+import consola from "consola";
 import type { TeableLoaderOptions } from "./teable-loader.types";
 import fs from "fs";
 const BACKUP_PATH = "./src/backup/table.json";
@@ -27,7 +28,7 @@ export const tableLoader = (options: TeableLoaderOptions) => {
     })
     .then((table) => table.records)
     .catch((error) => {
-      console.error("Error:", error);
+      consola.error(`Error: ${{ error }}`);
       const resp = fs.readFileSync(BACKUP_PATH, "utf-8");
       const object = JSON.parse(resp);
       return object.records;

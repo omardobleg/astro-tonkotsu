@@ -1,4 +1,5 @@
 import type { MiddlewareHandler } from "astro";
+import consola from "consola";
 
 type Path = string;
 interface ICachedResponse {
@@ -9,7 +10,7 @@ interface ICachedResponse {
 const cache = new Map<Path, ICachedResponse>();
 
 export const onRequest: MiddlewareHandler = async (req, next) => {
-  console.log("[Middleware] onRequest", req.url.pathname);
+  consola.info(`[Middleware] onRequest ${req.url.pathname}`);
   let ttl: number | undefined;
   // Add a `cache` method to the `req.locals` object
   // that will allow us to set the cache duration for each page.
@@ -20,8 +21,10 @@ export const onRequest: MiddlewareHandler = async (req, next) => {
   const cached = cache.get(req.url.pathname);
 
   if (cached && cached.expires > Date.now()) {
+    consola.info(`[Middleware] cached request ${req.url.pathname}`);
     return cached.response.clone();
   } else if (cached) {
+    consola.warn(`[Middleware] clearing cache  ${req.url.pathname}`);
     cache.delete(req.url.pathname);
   }
 
@@ -33,6 +36,7 @@ export const onRequest: MiddlewareHandler = async (req, next) => {
       response: response.clone(),
       expires: Date.now() + ttl * 1000,
     });
+    consola.start(`[Middleware] caching request ${req.url.pathname}`);
   }
 
   return response;
