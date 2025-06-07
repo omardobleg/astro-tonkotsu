@@ -12,12 +12,12 @@
     "@astrojs/node": "9.2.2",
     "@inox-tools/runtime-logger": "0.5.1",
     "@tailwindcss/vite": "4.1.8",
-    "astro": "5.8.1",
+    "astro": "5.9.1",
     "consola": "^3.4.2",
     "superjson": "^2.2.2",
     "tailwindcss": "4.1.8"
   },
   "devDependencies": {
-    "@types/node": "22.15.29"
+    "@types/node": "22.15.30"
   }
 }
